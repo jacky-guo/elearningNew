@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context crossContext="true" docBase="elearningNew" path="/elearningNew" reloadable="true">
+   <Resource name="jdbc/qbdm" auth="Container" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/qbdm"
+            username="root" password="1234" 
+            driverClassName="com.mysql.jdbc.Driver" maxActive="3000" maxIdle="10" maxWait="-1"  >
+  </Resource>
+</Context>

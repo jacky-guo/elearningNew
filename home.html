@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="bootstrap/bootstrap-3.3.7/docs/favicon.ico">
+    <title>E-learning System</title>
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap/bootstrap-3.3.7/docs/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/Drag&DropFile.css" rel="stylesheet">
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="bootstrap/bootstrap-3.3.7/docs/assets/js/ie-emulation-modes-warning.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+    body {
+        background-color: #F2F2F2;
+    }
+    
+    #container {
+        /*padding: 20px 40px;*/
+    }
+    
+    .leftDiv {
+        padding: 40px 40px;
+        background-color: #fff;
+        display: none;
+    }
+    
+    .question-area {
+        background-color: #fff;
+        box-shadow: 1px 1px 1px rgba(0, 0, 0, .1), 1px 1px 1px rgba(0, 0, 0, .1);
+        padding: 30px 50px;
+        margin-bottom: 20px;
+        border-radius: 3px;
+    }
+    
+    .question-area__tags {
+        font-size: 1.2em;
+        padding-bottom: 5px;
+    }
+    
+    .question-answer {
+        margin: 10px 0;
+        font-size: 1.6em;
+        line-height: 1.2;
+    }
+    
+    .question-area__content {
+        font-size: 1.6em;
+        line-height: 1.5;
+        text-align: justify;
+        margin-bottom: 25px;
+    }
+    
+    .question-area__content--border {
+        padding: 10px;
+        border: 1px solid #cfcfcf;
+    }
+    .navbar-brand{
+      padding: 7.5px;
+    }
+
+    .sidebar {
+        background-color: #222;
+    }
+
+    .sidebar > .nav-sidebar > li > a {
+        color:#fff;
+    }
+    .sidebar > .nav-sidebar > li > a:hover,
+    .sidebar > .nav-sidebar > li > a:focus{
+
+      background-color: #080808 ;
+    }
+    
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" onclick="test()" data-target="#sidebar" aria-controls="sidebar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img src="images/logo.png" alt="ElearningSystem" title="ElearningSystem">
+                </a>
+            </div>
+<!--             <div id="navbar" class="navbar-collapse collapse">
+                          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+            </div> -->
+        </div>
+    </nav>
+    <div id="container" class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar" id="sidebar">
+                <ul class="nav nav-sidebar">
+                    <li class="active"><a href="#insertWord">新增單字</a></li>
+                    <li><a href="#insertParagraph">新增教材</a></li>
+                    <li><a href="#insertLessonPlan">新增教案</a></li>
+                    <li><a href="#insertQuestion">新增題目</a></li>
+                </ul>
+                <ul class="nav nav-sidebar">
+                    <li><a href="#showWordList">查詢各年級單字</a></li>
+                    <li><a href="#showQuestionList" onclick="showQuestion();">練習專區</a></li>
+                    <!--             <li><a href="">One more nav</a></li>
+            <li><a href="">Another nav item</a></li>
+            <li><a href="">More navigation</a></li> -->
+                </ul>
+                <ul class="nav nav-sidebar">
+                    <!--             <li><a href="">Nav item again</a></li>
+            <li><a href="">One more nav</a></li>
+            <li><a href="">Another nav item</a></li> -->
+                </ul>
+            </div>
+            <div class="overlay"></div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 leftDiv" id="insertWord" style="display:block">
+                <form class="form-horizontal" id="wordform">
+                    <div class="form-group">
+                        <label for="word-Content" class="col-sm-2 control-label">單字</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="word-Content" placeholder="請輸入單字">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="word-Interpretation" class="col-sm-2 control-label">中文意思</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="word-Interpretation" placeholder="請輸入該單字的中文意思">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="word-PartOfSpeech" class="col-sm-2 control-label">詞性</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="word-PartOfSpeech">
+                                <option value="null">請選擇</option>
+                                <option value="noun">名詞(noun)</option>
+                                <option value="verb">動詞(verb)</option>
+                                <option value="adjective">形容詞(adjective)</option>
+                                <option value="adverb">副詞(adverb)</option>
+                                <option value="abbreviation">縮寫(abbreviation)</option>
+                                <option value="article">冠詞(article)</option>
+                                <option value="conjunction">連接詞(conjunction)</option>
+                                <option value="preposition">介繫詞(preposition)</option>
+                                <option value="pronoun">代名詞(pronoun)</option>
+                                <option value="auxiliary-verb">助動詞(auxiliary-verb)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="word-Grade" class="col-sm-2 control-label">年級</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="word-Grade">
+                                <option value="0">請選擇</option>
+                                <option value="3">國小三年級</option>
+                                <option value="4">國小四年級</option>
+                                <option value="5">國小五年級</option>
+                                <option value="6">國小六年級</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="word-Source" class="col-sm-2 control-label">來源</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="word-Source" placeholder="請輸入單詞來自第幾單元(例如:第一單元請輸入1)，課外單字輸入0">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="button" id="wordSubmit" class="btn btn-default">表單送出</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 leftDiv" id="insertParagraph" style="">
+                <form id="paragraphform" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="paragraph-content">請輸入教材</label>
+                        <textarea class="form-control" rows="6" id="paragraph-content"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="paragraph-grade" class="col-sm-2 control-label">教材類別</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="paragraph-grade">
+                                <option value="0">課外教材</option>
+                                <option value="3">國小三年級教材</option>
+                                <option value="4">國小四年級教材</option>
+                                <option value="5">國小五年級教材</option>
+                                <option value="6">國小六年級教材</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="paragraph-source" class="col-sm-2 control-label">來源</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="paragraph-source" placeholder="請輸入教材來自第幾單元(例如:第一單元請輸入1)，課外文章輸入該文章的網址">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="paragraph-hashTag" class="col-sm-2 control-label">HashTag</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="paragraph-hashTag" placeholder="可在此給這段教材一個標籤">
+                        </div>
+                    </div>
+                    <input class="btn btn-default" id="paragraphSubmit" type="button" value="送出">
+                </form>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 leftDiv" id="insertLessonPlan" style="">
+                <form class="form-horizontal" action="recvFile.jsp" method="post" enctype="multipart/form-data" id="lessonplanform">
+                    <div class="form-group">
+                        <label for="lessonplan-Grade" class="col-sm-2 control-label">年級</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="lessonplan-Grade" name="grade">
+                                <option value="0">請選擇</option>
+                                <option value="3">國小三年級</option>
+                                <option value="4">國小四年級</option>
+                                <option value="5">國小五年級</option>
+                                <option value="6">國小六年級</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lessonplan-Lesson" class="col-sm-2 control-label">單元</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="lessonplan-Lesson" name="lesson" placeholder="請輸入教案屬於第幾單元(例如:第一單元請輸入1)">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lessonplan-HashTag" class="col-sm-2 control-label">HashTag</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="lessonplan-HashTag" name="HashTag" placeholder="可在此給教案一個標籤">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lessonplan-Filename" class="col-sm-2 control-label">檔案</label>
+                        <div class="col-sm-10">
+                            <input type="file" name="filename" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <input type="submit" id="lessonplansubmit" class="btn btn-default" value="表單送出" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 leftDiv" id="insertQuestion" style="">
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 leftDiv" id="showWordList" style="">
+                <div class="starter-template">
+                    <form action="">
+                        <label for="name">請選擇難易程度</label>
+                        <select class="form-control" id="displayselect">
+                            <option value="3">國小三年級</option>
+                            <option value="4">國小四年級</option>
+                            <option value="5">國小五年級</option>
+                            <option value="6">國小六年級</option>
+                        </select>
+                    </form>
+                </div>
+                <div id='table'></div>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 leftDiv" id="showQuestionList" style="">
+                <div id='questionTable'>
+                    <table class="table table-condensed" id="mytable">
+                    </table>
+                </div>
+            </div>
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog" style="width: calc(90% - 20px)">
+                    <!-- Modal content-->
+                    <div class="modal-content" style="background-color:#ebf3f3">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <div id="headerContent">
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div id="#questionDiv" class="row">
+                                <div class="questions col-md-10 col-md-offset-1">
+                                    <div class="question-area">
+                                        <div class="question-area__question-wrapper">
+                                            <div class="question-area__tags" id="question-area-tags">
+                                                <P>選擇題</P>
+                                            </div>
+                                            <div class="question-area__content" id="question-area-content">
+                                                <p>Nowadays many companies adopt a ______ work schedule which allows their employees to decide when to arrive at work—from as early as 6 a.m. to as late as 11 a.m.</p>
+                                            </div>
+                                            <form id="question-area-answer">
+                                                <div class="question-area__answer">
+                                                    <div class="question-answer-title">
+                                                        1
+                                                    </div>
+                                                    <div class="question-answer">
+                                                        <label>
+                                                            <span><input type="radio" name="answer" value="a"></span>
+                                                            <span>(A)</span>
+                                                            <span id="answerA"> relative</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="question-answer">
+                                                        <label>
+                                                            <span><input type="radio" name="answer" value="b"></span>
+                                                            <span>(B)</span>
+                                                            <span id="answerA"> severe</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="question-answer">
+                                                        <label>
+                                                            <span><input type="radio" name="answer" value="c"></span>
+                                                            <span>(C)</span>
+                                                            <span id="answerA"> primitive</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="question-answer">
+                                                        <label>
+                                                            <span><input type="radio" name="answer" value="d"></span>
+                                                            <span>(D)</span>
+                                                            <span id="answerA"> flexible</span>
+                                                        </label>
+                                                    </div>
+                                                    <!--                                 <div class="radio-box">
+                                    <input class="radio-btn" type="radio" name="model1">
+                                    <label class="radio-label">Hello</label>
+                                    <input class="radio-btn" type="radio" name="model1" checked>
+                                    <label class="radio-label">World</label>
+                                    <input class="radio-btn" type="radio" name="model1">
+                                    <label class="radio-label">How</label>
+                                    <input class="radio-btn" type="radio" name="model1">
+                                    <label class="radio-label">Are</label>
+                                    <input class="radio-btn" type="radio" name="model1">
+                                    <label class="radio-label">You</label>
+                                    <span class="marker"></span>
+                                </div> -->
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="col-md-10 col-md-offset-1">
+                                <button type="button" class="btn btn-default" style="display: block;margin-left: -15px;">送出 </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+    window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+    </script>
+    <script src="bootstrap/bootstrap-3.3.7/docs/dist/js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="bootstrap/bootstrap-3.3.7/docs/assets/js/vendor/holder.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="bootstrap/bootstrap-3.3.7/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="js/myfunction.js" type="text/javascript"></script>
+</body>
+
+</html>
